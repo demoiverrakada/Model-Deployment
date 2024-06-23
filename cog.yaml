@@ -5,11 +5,6 @@ build:
   python_packages:
     - torch
     - transformers
-    - diffusers
-    - scipy
-    - ftfy
-    - accelerate
-  system_packages:
-    - git
+    - flask
 
 predict: "predict.py:Predictor"
