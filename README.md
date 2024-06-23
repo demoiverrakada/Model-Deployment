@@ -96,7 +96,46 @@ curl -X POST http://localhost:5000/predict \
 
 ## Deployment
 
-Deploy the model on replicate using below commands
+### Create the cog.yaml file
+
+```
+# cog.yaml
+
+build:
+  python_version: "3.8"
+  python_packages:
+    - torch
+    - transformers
+    - flask
+
+predict: "predict.py:Predictor"
+```
+
+### Create the predict.py file
+
+```
+# predict.py
+
+from cog import BasePredictor, Input, Path
+from transformers import BertTokenizer, BertModel
+import torch
+
+class Predictor(BasePredictor):
+    def setup(self):
+        """Load the pre-trained model and tokenizer"""
+        self.model_name = 'bert-base-uncased'
+        self.tokenizer = BertTokenizer.from_pretrained(self.model_name)
+        self.model = BertModel.from_pretrained(self.model_name)
+
+    def predict(self, text: str = Input(description="Input text to generate embeddings")) -> list:
+        """Generate embeddings for the input text"""
+        inputs = self.tokenizer(text, return_tensors='pt')
+        with torch.no_grad():
+            outputs = self.model(**inputs)
+        return outputs.last_hidden_state.squeeze().tolist()
+```
+
+### Deploy the model on replicate using below commands
 
 ```
 cog push r8.im/<your-username>/bert-base-uncased
