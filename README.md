@@ -1,6 +1,5 @@
-# Project Title
+# Model Deployment
 
-Model Deployment
 
 ## Getting Started
 
