@@ -1,7 +1,7 @@
 # Steps
 1. Setup Python and Docker in your OS
 2. Install Cog with the help of this command
-   curl https://replicate.github.io/codespaces/scripts/install-cog.sh | bash
+   # curl https://replicate.github.io/codespaces/scripts/install-cog.sh | bash
 3. Create you directory and write your codes in there
    mkdir best-base-uncased
    cd best-base-uncased
