@@ -1,0 +1,15 @@
+# cog.yaml
+
+build:
+  python_version: "3.8"
+  python_packages:
+    - torch
+    - transformers
+    - diffusers
+    - scipy
+    - ftfy
+    - accelerate
+  system_packages:
+    - git
+
+predict: "predict.py:Predictor"
